@@ -182,11 +182,22 @@ var LOGOS = {
           ? '<div class="wayang-badge">' + (c.logoKey ? LOGOS[c.logoKey] : '<img src="sinta-logo.png" alt="SINTA Wayang">') + '</div>'
           : '';
 
+
 var isSinta = c.cls === 'h-sinta' ||
               c.cls === 'h-impact';
 
-var startTag = isSinta
-  ? '<a href="https://sinta.kemdiktisaintek.go.id/journals/profile/10870" target="_blank" rel="noopener noreferrer" class="h-item ' + c.cls + '" style="color:#fff;text-decoration:none;cursor:pointer">'
+var isGoogleScholar = c.cls === 'h-gs';
+
+var link = '';
+
+if (isSinta) {
+  link = 'https://sinta.kemdiktisaintek.go.id/journals/profile/10870';
+} else if (isGoogleScholar) {
+  link = 'https://scholar.google.co.id/citations?user=hvosq_YAAAAJ&hl=en';
+}
+
+var startTag = link
+  ? '<a href="' + link + '" target="_blank" rel="noopener noreferrer" class="h-item ' + c.cls + '" style="color:#fff;text-decoration:none;cursor:pointer">'
   : '<div class="h-item ' + c.cls + '">';
 
 html += startTag +
@@ -200,9 +211,10 @@ html += startTag +
   '<div class="h-lbl">' + c.lbl + '</div>' +
   '</div>' +
   '<div class="h-deco">' + batikSVG(c.deco) + '</div>' +
-  (isSinta ? '</a>' : '</div>');
+  (link ? '</a>' : '</div>');
 }
 html += '</div>';
+
 
 
       document.getElementById('content').innerHTML = html;
